@@ -1,0 +1,182 @@
+$ Combined Al-Sc-Zr TDB
+$ Al-Sc data from mc_al_v2.032.pycalphad.tdb.txt
+$ Al-Zr data from COST507_Sundman.tdb.txt
+
+$ A) Definition of elements from mc_al_v2.032.pycalphad.tdb.txt
+ELEMENT VA   VACUUM            0.0             0.00              0.00       !
+ELEMENT AL   FCC_A1           26.98154         4540              28.30      !
+ELEMENT SC   HCP_A3           44.9559          5217.448              34.6435       !
+ELEMENT ZR   HCP_A3           91.224           5566.3            39.1809     !
+
+$ TYPE DEFINITIONS required for magnetic models in FCC_A1 and HCP_A3 phases
+TYPE_DEFINITION % SEQ * !
+TYPE_DEFINITION ' GES A_P_D FCC_A1 MAGNETIC  -3.0    0.28 !
+TYPE_DEFINITION ) GES A_P_D HCP_A3 MAGNETIC  -3.0    0.28 !
+
+$ C) Gibbs energy functions from mc_al_v2.032.pycalphad.tdb.txt
+FUNCTION GHSERAL
+ 273.00 -7976.15+137.093038*T-24.3671976*T*LN(T)
+ -1.884662E-3*T**2-0.877664E-6*T**3+74092*T**(-1); 700.00  Y
+ -11276.24+223.048446*T-38.5844296*T*LN(T)
+ +18.531982E-3*T**2-5.764227E-6*T**3+74092*T**(-1); 933.47  Y
+ -11278.378+188.684153*T-31.748192*T*LN(T)-1.231E+28*T**(-9); 2900.00  N !
+
+FUNCTION GHSERSC 273.00 -8689.547+153.48097*T-28.1882*T*LN(T)
+ +0.00321892*T**2-1.64531E-06*T**3+72177*T**(-1); 800  Y
+ -7511.295+132.759582*T-24.9132*T*LN(T)-5.73295E-04*T**2
+ -8.59345E-07*T**3; 1608.00  Y
+ +261143.04-1817.922454*T+241.4410508*T*LN(T)-117.529396E-3*T**2
+ +8.7398E-6*T**3-50607159*T**(-1); 2000.00  Y
+ -30515.246+286.474338*T-44.2249*T*LN(T); 3200.00  N !
+
+FUNCTION GHSERZR
+ 273.00 -7827.595+125.64905*T-24.1618*T*LN(T)-4.37791E-3*T**2
+ +34971*T**(-1); 2128.00  Y
+ -26085.921+262.724183*T-42.144*T*LN(T)-1342.895E28*T**(-9); 6000.00  N !
+
+FUNCTION GSCFCC
+ 273.00 -3689.547+153.48097*T-28.1882*T*LN(T)+0.00321892*T**2
+ -1.64531E-06*T**3+72177*T**(-1); 800.00  Y
+ -2511.295+132.759582*T-24.9132*T*LN(T)-5.73295E-04*T**2
+ -8.59345E-07*T**3; 1600.00  Y
+ +266143.04-1817.92245*T+241.441051*T*LN(T)-0.117529396*T**2+8.7398E-6*T**3
+ -50607159*T**(-1); 2000.00  Y
+ -25515.246+286.474338*T-44.2249*T*LN(T); 3200.00  N !
+
+FUNCTION GSCLIQ
+ 273.00 +6478.66+45.427539*T-10.7967803*T*LN(T)-20.636524E-3*T**2
+ +2.13106E-6*T**3-158106*T**(-1); 1608  Y
+ -11832.111+275.871695*T-44.2249*T*LN(T); 6000  N !
+
+FUNCTION GZRLIQ
+ 273.00 +18147.703-9.080762*T+1.6275E-22*T**7+GHSERZR#; 2128.00  Y
+ +17804.649-8.91153*T+1.343E+31*T**(-9)+GHSERZR#; 6000.00  N !
+
+$ D) Thermodynamic descriptions of phases
+$###########################################################################
+$                   LIQUID
+$###########################################################################
+PHASE LIQUID % 1  1.0 !
+    CONSTITUENT LIQUID  : AL,SC,ZR : !
+
+$ Unary parameters from mc_al_v2.032.pycalphad.tdb.txt
+PARAMETER G(LIQUID,AL;0) 273.00 +11005.029-11.841867*T+7.934E-20*T**7+GHSERAL#;
+ 933.47 Y +10482.382-11.253974*T+1.231E+28*T**(-9)+GHSERAL#; 2900.00 N !
+PARAMETER G(LIQUID,SC;0) 273.00 +GSCLIQ#; 3200.00 N !
+PARAMETER G(LIQUID,ZR;0) 273.00 +GZRLIQ#; 6000.00 N !
+
+$ Al-Sc parameters from mc_al_v2.032.pycalphad.tdb.txt
+PARAMETER L(LIQUID,AL,SC;0) 273.00 -155000+10*T; 6000.00 N !
+PARAMETER L(LIQUID,AL,SC;1) 273.00 +20000; 6000.00 N !
+PARAMETER L(LIQUID,AL,SC;2) 273.00 +15000; 6000.00 N !
+
+$ Al-Zr parameters from COST507_Sundman.tdb.txt
+PARAMETER G(LIQUID,AL,ZR;0) 2.98150E+02 -125000+35*T; 6.00000E+03 N !
+PARAMETER G(LIQUID,AL,ZR;1) 2.98150E+02 -10000+5.57*T; 6.00000E+03 N !
+PARAMETER G(LIQUID,AL,ZR;2) 2.98150E+02 15750; 6.00000E+03 N !
+
+$###########################################################################
+$                   FCC_A1
+$###########################################################################
+PHASE FCC_A1  %'  2 1   1 !
+    CONSTITUENT FCC_A1 : AL,SC,ZR : VA : !
+
+$ Unary parameters from mc_al_v2.032.pycalphad.tdb.txt
+PARAMETER G(FCC_A1,AL:VA;0) 273.00 +GHSERAL#; 2900.00 N !
+PARAMETER G(FCC_A1,SC:VA;0) 273.00 +GSCFCC#; 3600.00 N !
+PARAMETER G(FCC_A1,ZR:VA;0) 273.00 +7600.00-0.9*T+GHSERZR#; 6000.00 N !
+
+$ Al-Sc parameters from mc_al_v2.032.pycalphad.tdb.txt
+PARAMETER L(FCC_A1,AL,SC:VA;0) 273.00 -110876; 6000.00 N !
+
+$ Al-Zr parameters from COST507_Sundman.tdb.txt
+PARAMETER G(FCC_A1,AL,ZR:VA;0) 2.98150E+02 -120000+30*T; 6.00000E+03 N !
+PARAMETER G(FCC_A1,AL,ZR:VA;1) 2.98150E+02 -10000; 6.00000E+03 N !
+PARAMETER G(FCC_A1,AL,ZR:VA;2) 2.98150E+02 15000; 6.00000E+03 N !
+
+$###########################################################################
+$                   HCP_A3
+$###########################################################################
+PHASE HCP_A3  %)  2 1   .5 !
+    CONSTITUENT HCP_A3  : AL,SC,ZR : VA : !
+
+$ Unary parameters from mc_al_v2.032.pycalphad.tdb.txt
+PARAMETER G(HCP_A3,AL:VA;0) 273.00 +5481-1.8*T+GHSERAL#; 2900.00 N !
+PARAMETER G(HCP_A3,SC:VA;0) 273.00 +GHSERSC#; 3600.00 N !
+PARAMETER G(HCP_A3,ZR:VA;0) 273.00 +GHSERZR#; 6000.00 N !
+
+$ Al-Sc parameters are not explicitly given in mc_al_v2.032.pycalphad.tdb.txt for HCP_A3, assuming ideal mixing.
+
+$ Al-Zr parameters from COST507_Sundman.tdb.txt
+PARAMETER G(HCP_A3,AL,ZR:VA;0) 2.98150E+02 -122300+32*T; 6.00000E+03 N !
+PARAMETER G(HCP_A3,AL,ZR:VA;1) 2.98150E+02 -8000; 6.00000E+03 N !
+PARAMETER G(HCP_A3,AL,ZR:VA;2) 2.98150E+02 17000; 6.00000E+03 N !
+
+$###########################################################################
+$ Al-Sc Intermetallic Phases from mc_al_v2.032.pycalphad.tdb.txt
+$###########################################################################
+PHASE AL3SC  % 2  3 1 !
+    CONSTITUENT AL3SC   : AL : SC : !
+PARAMETER G(AL3SC,AL:SC;0) 273.00 -168000+14.75*T+3*GHSERAL#
+ +GHSERSC#; 6000.00  N !
+
+PHASE ALSC  % 2  1 1 !
+    CONSTITUENT ALSC   : AL : SC : !
+PARAMETER G(ALSC,AL:SC;0) 273.00 -92000+0.5*T+GHSERAL#+GHSERSC#; 6000.00  N !
+
+PHASE AL2SC  % 2  2  1 !
+    CONSTITUENT AL2SC  : AL : SC : !
+PARAMETER G(AL2SC,AL:SC;0) 273.00 -144000+8.4*T+2*GHSERAL#
+ +GHSERSC#; 6000.00  N !
+
+PHASE SC2AL  % 2  1   2 !
+    CONSTITUENT SC2AL  : AL : SC : !
+PARAMETER G(SC2AL,AL:SC;0) 273.00 -124500+GHSERAL#+2*GHSERSC#; 6000.00  N !
+
+$###########################################################################
+$ Al-Zr Intermetallic Phases from COST507_Sundman.tdb.txt
+$###########################################################################
+PHASE ALZR  %  2 1   1 !
+    CONSTITUENT ALZR  :AL : ZR :  !
+PARAMETER G(ALZR,AL:ZR;0)  2.98150E+02  -89000+17.0384*T+GHSERAL#
+  +GHSERZR#;   6.00000E+03   N !
+
+PHASE ALZR2  %  2 1   2 !
+    CONSTITUENT ALZR2  :AL : ZR :  !
+PARAMETER G(ALZR2,AL:ZR;0)  2.98150E+02  -100125+17.553*T+GHSERAL#
+  +2*GHSERZR#;   6.00000E+03   N !
+
+PHASE ALZR3  %  2 1   3 !
+    CONSTITUENT ALZR3  :AL : ZR :  !
+PARAMETER G(ALZR3,AL:ZR;0)  2.98150E+02  -108000+22.38*T+GHSERAL#
+  +3*GHSERZR#;   6.00000E+03   N !
+
+PHASE AL2ZR  %  2 2   1 !
+    CONSTITUENT AL2ZR  :AL : ZR :  !
+PARAMETER G(AL2ZR,AL:ZR;0)  2.98150E+02  -137430+25.44*T+2*GHSERAL#
+  +GHSERZR#;   6.00000E+03   N !
+
+PHASE AL2ZR3  %  2 2   3 !
+    CONSTITUENT AL2ZR3  :AL : ZR :  !
+PARAMETER G(AL2ZR3,AL:ZR;0)  2.98150E+02  -192135+33*T+2*GHSERAL#
+  +3*GHSERZR#;   6.00000E+03   N !
+
+PHASE AL3ZR  %  2 3   1 !
+    CONSTITUENT AL3ZR  :AL : ZR :  !
+PARAMETER G(AL3ZR,AL:ZR;0)  2.98150E+02  -162500+28.92*T+3*GHSERAL#
+  +GHSERZR#;   6.00000E+03   N !
+
+PHASE AL3ZR2  %  2 3   2 !
+    CONSTITUENT AL3ZR2  :AL : ZR :  !
+PARAMETER G(AL3ZR2,AL:ZR;0)  2.98150E+02  -234700+44.1*T+3*GHSERAL#
+  +2*GHSERZR#;   6.00000E+03   N !
+
+PHASE AL3ZR5  %  2 3   5 !
+    CONSTITUENT AL3ZR5  :AL : ZR :  !
+PARAMETER G(AL3ZR5,AL:ZR;0)  2.98150E+02  -289984+48.72*T+3*GHSERAL#
+  +5*GHSERZR#;   6.00000E+03   N !
+
+PHASE AL4ZR5  %  2 4   5 !
+    CONSTITUENT AL4ZR5  :AL : ZR :  !
+PARAMETER G(AL4ZR5,AL:ZR;0)  2.98150E+02  -369000+62.55*T+4*GHSERAL#
+  +5*GHSERZR#;   6.00000E+03   N !
