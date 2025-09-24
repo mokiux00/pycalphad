@@ -1,0 +1,95 @@
+$$ Cu-Zr binary system
+$$ use Version 5.1b of Unary database - 29 November 2010
+$$ final version for publication
+$$ save as from Cu-Zr_Final_for publication_v1.tdb
+$$ Change CU9ZR2,CU51ZR14,CU8ZR3,CU10ZR7,CUZR2 to 6 digital
+$$ 30 November 2015
+
+ELEMENT /-   ELECTRON_GAS              0.0000E+00  0.0000E+00  0.0000E+00 !
+ELEMENT VA   VACUUM                    0.0000E+00  0.0000E+00  0.0000E+00 !
+ELEMENT CU   FCC_A1                    6.3546E+01  5.0041E+03  3.3150E+01 !
+ELEMENT ZR   HCP_A3                    9.1224E+01  5.5663E+03  3.9181E+01 !
+
+$CU				
+FUNCTION GHSERCU  298.15
+-7770.458+130.485235*T-24.112392*T*LN(T)-2.65684E-3*T**2+0.129223E-6*T**3
++52478*T**(-1);  1357.77 Y
+-13542.026+183.803828*T-31.38*T*LN(T)+364.167E27*T**(-9);  3200.00 N !
+FUNCTION GBCCCU 298.15  4017-1.255*T+GHSERCU; 3200 N !
+FUNCTION GHCPCU 298.15  600+0.2*T+GHSERCU; 3200 N !
+FUNCTION GLIQCU 298.15 12964.735-9.511904*T-584.89E-23*T**7+GHSERCU; 1357.77 Y
+-46.545+173.881484*T-31.38*T*LN(T); 3200 N !
+$------------------------------------------------------------------------------
+$ZR					   
+FUNCTION GHSERZR  130.00
+-7827.595+125.64905*T-24.1618*T*LN(T)-4.37791E-3*T**2+34971*T**(-1);  
+2128.00 Y
+-26085.921+262.724183*T-42.144*T*LN(T)-1342.896E28*T**(-9);  6000.00 N !
+FUNCTION GBCCZR   298.15
+-525.539+124.9457*T-25.607406*T*LN(T)-0.340084E-3*T**2-0.009729E-6*T**3
++25233*T**(-1)-0.076143E-9*T**4;  2128.00 Y
+-30705.955+264.284163*T-42.144*T*LN(T)+1276.058E29*T**(-9);  6000.00 N !
+FUNCTION GLIQZR 298.15 18147.69-9.080812*T+1627.5E-25*T**7+GHSERZR; 2128 Y
+-8281.26+253.812609*T-42.144*T*LN(T);  6000.00 N !
+FUNCTION GFCCZR 298.15 7600-0.9*T+GHSERZR; 6000 N !
+$------------------------------------------------------------------------------
+TYPE_DEFINITION % SEQ *!
+DEFINE_SYSTEM_DEFAULT ELEMENT 2 !
+DEFAULT_COMMAND DEF_SYS_ELEMENT VA !
+$-------------------------------------------------------------------------------
+$Phases Parameters
+$-------------------------------------------------------------------------------
+PHASE LIQUID % 1 1.0 !
+Constituent LIQUID :CU,ZR:!
+PARAMETER G(LIQUID,CU;0) 298.15 +GLIQCU; 3200 N !
+PARAMETER G(LIQUID,ZR;0) 298.15 +GLIQZR; 6000 N !
+PARAMETER G(LIQUID,CU,ZR;0) 298.15 -67897.6+18.0843*T; 6000 N !
+PARAMETER G(LIQUID,CU,ZR;1) 298.15 -5634.86+3.3207*T; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE FCC % 1 1.0 !
+Constituent FCC :CU,ZR:!
+PARAMETER G(FCC,CU;0) 298.15  +GHSERCU; 3200 N !
+PARAMETER G(FCC,ZR;0) 298.15  +GFCCZR;  6000 N !
+PARAMETER G(FCC,CU,ZR;0) 298.15  +4193.48 ; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE BCC % 1 1.0 !
+Constituent BCC :CU,ZR:!
+PARAMETER G(BCC,CU;0) 298.15 +GBCCCU; 3200 N !
+PARAMETER G(BCC,ZR;0) 298.15 +GBCCZR; 6000 N !
+PARAMETER G(BCC,CU,ZR;0) 298.15 -3804.59; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE HCP % 1 1.0 !
+Constituent HCP :CU,ZR:!
+PARAMETER G(HCP,CU;0) 298.15 +GHCPCU; 3200 N !
+PARAMETER G(HCP,ZR;0) 130 +GHSERZR; 6000 N !
+PARAMETER G(HCP,CU,ZR;0) 298.15 +16507; 3200 N !
+$-------------------------------------------------------------------------------
+PHASE CU9ZR2 % 2  0.818182  0.181818 !
+Constituent CU9ZR2 :CU:ZR:!
+PARAMETER G(CU9ZR2,CU:ZR;0) 298.15  
+-9931.53-0.5372*T+0.818182*GHSERCU+0.181818*GHSERZR; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE CU51ZR14 % 2 0.784615 0.215385 !
+Constituent CU51ZR14 :CU:ZR:!
+PARAMETER G(CU51ZR14,CU:ZR;0) 298.15 
+-12216.4-0.115*T+0.784615*GHSERCU+0.215385*GHSERZR; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE CU8ZR3 % 2 0.727273 0.272727 !
+Constituent CU8ZR3 :CU:ZR:!
+PARAMETER G(CU8ZR3,CU:ZR;0) 298.15  
+-13105.8+0.0319*T+0.727273*GHSERCU+0.272727*GHSERZR; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE CU10ZR7 % 2 0.588235 0.411765 !
+Constituent CU10ZR7 :CU:ZR:!
+PARAMETER G(CU10ZR7,CU:ZR;0) 298.15  
+-15353+1.335*T+0.588235*GHSERCU+0.411765*GHSERZR; 6000 N !
+$-------------------------------------------------------------------------------
+PHASE CUZR % 2 0.5 0.5 !
+Constituent CUZR :CU:ZR:!
+PARAMETER G(CUZR,CU:ZR;0) 298.15  
+-9388.77-4.0134*T+0.5*GHSERCU+0.5*GHSERZR; 6000 N!
+$-------------------------------------------------------------------------------
+PHASE CUZR2 % 2 0.333333 0.666667 !
+Constituent CUZR2 :CU:ZR:!
+PARAMETER G(CUZR2,CU:ZR;0) 298.15 
+-12451.2+0.380966*T+0.333333*GHSERCU+0.666667*GHSERZR; 6000 N !

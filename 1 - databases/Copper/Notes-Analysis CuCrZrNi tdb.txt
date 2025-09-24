@@ -1,0 +1,25 @@
+Binary systems to test:
+Cu-Cr - There is horizontal Liquidus line when all phases of the tdb are selected.
+        If only ['LIQUID','FCC_A1','BCC_A2'] are selected, the phase diagram is good. It shows miscibility gap in liquid
+
+Cu-Ni - Good, binary diagram with miscibility in the FCC region with all phases selected from the tdb
+
+Cu-Zr - Good, binary diagram with all phases selected in the tdb
+
+Cr-Zr - Good agreement
+
+Cr-Ni - Good at high temperature, fails a bit in the Ni rich corner at low temperature
+
+Zr-Ni - If all phases from the database are selected, an invariant reaction between NI21ZR8 and NI10ZR7 is missing.
+	Good, only when selected Zr-Ni phases:  
+        ['LIQUID','FCC_A1','HCP_A3','BCC_A2','NI5ZR','NI7ZR2','NI3ZR','NI21ZR8','NI10ZR7','NI11ZR9','NIZR','ZR2NI']
+	GOOD if all phases are selected, except TAO phase which is commented in the database
+
+
+
+Adding silicon, we would need the binaries:
+Cu-Si - Not good at the Si end
+Cr-Si
+Zr-Si
+Ni-Si
+
