@@ -1,0 +1,67 @@
+
+$ ------------------------------------------------------------------------------
+$ Cu
+$
+$ BCT_A5 from 00Moo not included in unary
+$ CBCC_A12 and CUB_A13 not included in unary
+$
+ PAR  G(BCC_A2,CU:VA),,                 +GHSERCU+4017-1.255*T;   3200 N 91Din !
+ PAR  G(HCP_A3,CU:VA),,                 +GHSERCU+600+0.2*T;      3200 N 91Din !
+ 
+$
+ FUNCTION GHSERCU   298.15  -7770.458+130.485235*T-24.112392*T*LN(T)
+       -0.00265684*T**2+1.29223E-07*T**3+52478*T**(-1);
+      1357.77  Y  -13542.026+183.803828*T-31.38*T*LN(T)+3.64167E+29*T**(-9);
+      3200.00  N !
+ FUNCTION GLIQCU    298.15  +12964.735-9.511904*T+GHSERCU-5.8489E-21*T**7;
+      1357.77  Y  -46.545+173.881484*T-31.38*T*LN(T);
+      3200.00  N !
+ FUNCTION GBCCCU    298.15  +GHSERCU+4017-1.255*T;                     3200 N !
+$ ------------------------------------------------------------------------------
+$ Si
+$
+ 
+$PAR  G(CBCC_A12,SI:VA),,               +GHSERSI+50208-20.377*T; 3600 N 91Din !
+$PAR  G(CUB_A13,SI:VA),,                +GHSERSI+47279-20.377*T; 3600 N 91Din !
+$
+ 
+
+$ ------------------------------------------------------------------------------
+$ Binary system
+$
+$ A. Kroupa, O. Zobac, A. Zemanova, K.W. Richter,
+$ J. Phase Equilib. Diffus., 45, 1206-43(2024).
+$
+$ Checked against paper and author's tdb. Checked at 6000K.
+$
+$ Based on 16Hal.
+$
+$ BCC_A2 is stable as beta at about CU85SI15 and HCP_A3 is stable as
+$ kappa at about CU87SI13.
+$
+ 
+$
+
+$
+
+$
+
+$
+
+$ ------------------------------------------------------------------------------
+$
+$
+ LIST-OF-REFERENCE
+ NUMBER  SOURCE
+  Null   'Unknown source'
+  Same   'Same or similar interaction as in the corresponding stable phase'
+  COST   'COST 507 database'
+  91Din  'A.T. Dinsdale, Calphad, 15, 317-425(1991).'
+  00Moo  'K.-W. Moon, W.J. Boettinger, U.R. Kattner, F.S. Biancaniello,
+          C.A. Handwerker, J. Electron. Mater., 29, 1122-36(2000); Cu'
+  03Mie2 'J. Miettinen, Calphad, 27, 103-14(2003); Cu'
+  16Hal  'B. Hallstedt, J. Groebner, M. Hampl, R. Schmid-Fetzer,
+          Calphad, 53, 25-38(2016); Cu-Si'
+  24Kro  'A. Kroupa, O. Zobac, A. Zemanova, K.W. Richter,
+          J. Phase Equilib. Diffus., 45, 1206-43(2024); Cu-Si'
+!
