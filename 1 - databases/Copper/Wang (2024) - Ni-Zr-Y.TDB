@@ -1,0 +1,440 @@
+$           Ni-Zr-Y system  
+$      Database fIle wRItten 20231108
+$     
+$ FRom database: USER                    
+ ELEMENT /-   ELECTRON_GAS              0.0000E+00  0.0000E+00  0.0000E+00!
+ ELEMENT VA   VACUUM                    0.0000E+00  0.0000E+00  0.0000E+00!
+ ELEMENT NI   FCC_A1                    5.8690E+01  4.7870E+03  2.9796E+01!
+ ELEMENT Y    HCP_A3                    8.8906E+01  0.0000E+00  0.0000E+00!
+ ELEMENT ZR   HCP_A3                    9.1224E+01  5.5663E+03  3.9181E+01!
+ 
+ SPECIES NI2                         NI2!
+ SPECIES VA-2                        VA1/-2!
+ SPECIES VA-4                        VA1/-4!
+ SPECIES ZR2                         ZR2!
+ 
+ FUNCTION GLIQNI    298.15 +GHSERNI#+16414.686-9.397*T-3.82318E-21*T**7;
+     1728 Y
+      -9549.817+268.597977*T-43.1*T*LN(T); 3000 N !
+ FUNCTION GLIQYY    100 +2098.50738+119.41873*T-24.6467508*T*LN(T)
+     -.00347023463*T**2-8.12981167E-07*T**3+23713.7332*T**(-1); 1000 Y
+      +7386.44846+19.4520171*T-9.0681627*T*LN(T)-.0189533369*T**2
+     +1.7595327E-06*T**3; 1795.15 Y
+      -12976.5957+257.400783*T-43.0952*T*LN(T); 3700 N !
+ FUNCTION GLIQZR    298.15 +GHSERZR#+18147.69-9.080812*T+1.6275E-22*T**7;
+     2128 Y
+      -8281.26+253.812609*T-42.144*T*LN(T); 6000 N !
+ FUNCTION GHSERNI   298.15 -5179.159+117.854*T-22.096*T*LN(T)-.0048407*T**2;
+     1728 Y
+      -27840.62+279.134977*T-43.1*T*LN(T)+1.12754E+31*T**(-9); 3000 N !
+ FUNCTION GFCCYY    100 +GHSERYY#+6000; 3700 N !
+ FUNCTION GFCCZR    298.15 +GHSERZR#+7600-.9*T; 6000 N !
+ FUNCTION GBCCNI    298.15 +GHSERNI#+8715.084-3.556*T; 3000 N !
+ FUNCTION GB2NIVA   298.15 +162397.3-27.4058*T; 6000 N !
+ FUNCTION LB2NIVA   298.15 -64024.38+26.4942*T; 6000 N !
+ FUNCTION GBCCYY    100    -833.658863+123.667346*T-25.5832578*T*LN(T)
+     -.00237175965*T**2+9.10372497E-09*T**3+27340.0687*T**(-1); 1000 Y
+      -1297.79829+134.528352*T-27.3038477*T*LN(T)-5.41757644E-04*T**2
+      -3.05012175E-07*T**3; 1795.15 Y
+      +15389.4975+.981325399*T-8.88296647*T*LN(T)-.00904576576*T**2
+     +4.02944768E-07*T**3-2542575.96*T**(-1); 3700 N !
+ FUNCTION GBCCZR    298.15 -525.539+124.9457*T-25.607406*T*LN(T)
+     -3.40084E-04*T**2-9.729E-09*T**3+25233*T**(-1)-7.6143E-11*T**4; 2128 Y
+      -30705.955+264.284163*T-42.144*T*LN(T)+1.276058E+32*T**(-9); 6000 N !
+ FUNCTION GHCPNI    298.15 +GHSERNI#+1046+1.2552*T; 3000 N !
+ FUNCTION GHSERYY   100 -8011.09379+128.572856*T-25.6656992*T*LN(T)
+     -.00175716414*T**2-4.17561786E-07*T**3+26911.509*T**(-1); 1000 Y
+      -7179.74574+114.497104*T-23.4941827*T*LN(T)-.0038211802*T**2
+     -8.2534534E-08*T**3; 1795.15 Y
+      -67480.7761+382.124727*T-56.9527111*T*LN(T)+.00231774379*T**2
+     -7.22513088E-08*T**3+18077162.6*T**(-1); 3700 N !
+ FUNCTION GHSERZR   130 -7827.595+125.64905*T-24.1618*T*LN(T)-.00437791*T**2
+     +34971*T**(-1); 2128 Y
+      -26085.921+262.724183*T-42.144*T*LN(T)-1.342896E+31*T**(-9); 6000 N !
+
+ TYPE_DEFINITION % SEQ *!
+ DEFINE_SYSTEM_DEFAULT ELEMENT 2 !
+ DEFAULT_COMMAND DEF_SYS_ELEMENT VA /- !
+
+
+ TYPE_DEFINITION * GES A_P_D CBCC_A12 MAGNETIC  -3.0    2.80000E-01 !
+ PHASE CBCC_A12  %*  2 1   1 !
+    CONSTITUENT CBCC_A12  :NI,ZR : VA :  !
+
+   PARAMETER G(CBCC_A12,NI:VA;0)          298.15 +GHSERNI#+3556; 3000 N REF4 !
+   PARAMETER G(CBCC_A12,ZR:VA;0)          298.15 +GHSERZR#+4602.2; 6000 N
+  REF3 !
+
+
+
+ PHASE CUB_A13  %  2 1   1 !
+    CONSTITUENT CUB_A13  :NI,ZR : VA :  !
+
+   PARAMETER G(CUB_A13,NI:VA;0)           298.15 +GHSERNI#+2092; 3000 N REF4 !
+   PARAMETER G(CUB_A13,ZR:VA;0)           298.15 +GHSERZR#+7531.2; 6000 N
+  REF3 !
+ PHASE LAVES_C14  %  2 2   1 !
+    CONSTITUENT LAVES_C14  :ZR : ZR :  !
+
+ PARAMETER G(LAVES_C14,ZR:ZR;0)   298.15 +62388-4.32*T+3*GHSERZR#; 6000 N  !
+
+
+ TYPE_DEFINITION 1 GES A_P_D LAVES_C15 MAGNETIC  -3.0    2.80000E-01 !
+ PHASE LAVES_C15  %1  2 2   1 !
+    CONSTITUENT LAVES_C15  :ZR : ZR :  !
+
+ PARAMETER G(LAVES_C15,ZR:ZR;0)    298.15 +81154-8.33*T+3*GHSERZR#; 6000 N  !
+
+
+ PHASE LAVES_C36  %  2 2   1 !
+    CONSTITUENT LAVES_C36  :NI,ZR : NI,ZR :  !
+
+  PARAMETER G(LAVES_C36,NI:NI;0)   298.15 +15000+3*GHSERNI#; 6000 N!
+  PARAMETER G(LAVES_C36,ZR:NI;0)   298.15 +0; 6000 N!
+  PARAMETER G(LAVES_C36,NI:ZR;0)   298.15 +0; 6000 N!
+  PARAMETER G(LAVES_C36,ZR:ZR;0)   298.15 +69218.7-3.44*T+3*GHSERZR#; 6000 N!
+
+$---------------------------------------------------
+$----------------FCC_A1-----------------------------
+$---------------------------------------------------
+
+ TYPE_DEFINITION + GES A_P_D FCC_A1 MAGNETIC  -3.0    2.80000E-01 !
+ PHASE FCC_A1  %+  2 1   1 !
+   CONSTITUENT FCC_A1  :NI,Y,ZR : VA :  !
+   PARAMETER G(FCC_A1,NI:VA;0)            298.15 +GHSERNI#; 3000 N REF4 !
+   PARAMETER TC(FCC_A1,NI:VA;0)           298.15 +633; 3000 N REF2 !
+   PARAMETER BMAGN(FCC_A1,NI:VA;0)        298.15 +0.52; 3000 N REF2 !
+   PARAMETER G(FCC_A1,Y:VA;0)             100    +GFCCYY#; 3700 N REF3 !
+   PARAMETER G(FCC_A1,ZR:VA;0)            298.15 +GFCCZR#; 6000 N REF2 !
+   PARAMETER G(FCC_A1,NI,ZR:VA;0)         298.15 -125000+5.25*T; 6000 N  !
+   PARAMETER G(FCC_A1,Y,ZR:VA;0)          298.15 +60000; 6000 N   !
+   PARAMETER G(FCC_A1,NI,Y:VA;0)          298.15 100000; 6000 N ! 
+
+
+
+$---------------------------------------------------
+$----------------BCC_A2-----------------------------
+$---------------------------------------------------
+
+ TYPE_DEFINITION ' GES A_P_D BCC_A2 MAGNETIC  -1.0    4.00000E-01 !
+ PHASE BCC_A2  %'  2 1   3 !
+    CONSTITUENT BCC_A2  :NI,VA,Y,ZR : VA :  !
+   PARAMETER G(BCC_A2,NI:VA;0)      298.15 +GBCCNI#;           3000 N REF4 !
+   PARAMETER TC(BCC_A2,NI:VA;0)     298.15 +575;               3000 N REF2 !
+   PARAMETER BMAGN(BCC_A2,NI:VA;0)  298.15 +.85;               3000 N REF2 !
+   PARAMETER G(BCC_A2,VA:VA;0)      298.15 +80*T;              6000 N REF55!
+   PARAMETER G(BCC_A2,Y:VA;0)       100 +GBCCYY#;              3700 N REF2 !
+   PARAMETER G(BCC_A2,ZR:VA;0)      298.15 +GBCCZR#;           6000 N REF2 !
+   PARAMETER G(BCC_A2,NI,VA:VA;0)   298.15 +GB2NIVA#+LB2NIVA#;    6000 N !
+   PARAMETER G(BCC_A2,NI,ZR:VA;0)   298.15 -127524.01+10.0625*T;  6000 N !
+   PARAMETER G(BCC_A2,NI,ZR:VA;1)   298.15 -50475.37+3.9857*T;    6000 N !
+   PARAMETER G(BCC_A2,VA,ZR:VA;0)   298.15 +150000;               6000 N !
+   PARAMETER G(BCC_A2,Y,ZR:VA;0)    298.15 +78604.723-14.2239*T;  6000 N !
+
+
+$---------------------------------------------------
+$----------------HCP_A3-----------------------------
+$---------------------------------------------------
+
+ TYPE_DEFINITION / GES A_P_D HCP_A3 MAGNETIC  -3.0    2.80000E-01 !
+ PHASE HCP_A3  %/  2 1   .5 !
+   CONSTITUENT HCP_A3  :NI,Y,ZR : VA :  !
+
+   PARAMETER G(HCP_A3,NI:VA;0)        298.15 +GHCPNI#;        3000 N REF4 !
+   PARAMETER TC(HCP_A3,NI:VA;0)       298.15 +633;            3000 N REF2 !
+   PARAMETER BMAGN(HCP_A3,NI:VA;0)    298.15 +0.52;           3000 N REF2 !
+   PARAMETER G(HCP_A3,Y:VA;0)         100    +GHSERYY#;       3700 N REF2 !
+   PARAMETER G(HCP_A3,ZR:VA;0)        298.15 +GHSERZR#;       6000 N REF1 !
+   PARAMETER G(HCP_A3,NI,ZR:VA;0)     298.15 -63677;              6000 N  !
+   PARAMETER G(HCP_A3,Y,ZR:VA;0)      298.15 +53896.366-2.2881*T; 6000 N !
+   
+
+
+$---------------------------------------------------
+$----------------LIQUID-----------------------------
+$---------------------------------------------------
+
+ PHASE LIQUID  %  1  1.0  !
+    CONSTITUENT LIQUID  :NI,Y,ZR :  !
+
+   PARAMETER G(LIQUID,NI;0)         298.15   +GLIQNI#;           3000 N REF4 !
+   PARAMETER G(LIQUID,Y;0)          100      +GLIQYY#;           3700 N REF2 !
+   PARAMETER G(LIQUID,ZR;0)         298.15   +GLIQZR#;           6000 N REF2 !
+   PARAMETER G(LIQUID,NI,ZR;0)      298.15   -232280.21
+                                              +74.1438*T-0.01384*T**2;6000 N !
+   PARAMETER G(LIQUID,NI,ZR;1)      298.15   -88738.49+47.3991*T       
+                                                -0.003548*T**2;       6000 N !
+   PARAMETER G(LIQUID,NI,ZR;2)      298.15   23758-14.9104*T;         6000 N !
+   PARAMETER G(LIQUID,Y,ZR;0)       298.15   +22718.358;              6000 N !
+   PARAMETER G(LIQUID,Y,ZR;1)       298.15   +5302.237;               6000 N !
+   PARAMETER G(LIQUID,NI,Y;0)       298.15   -155496+38.932*T;        6000 N !
+   PARAMETER G(LIQUID,NI,Y;1)       298.15   -52904+6.785*T;          6000 N !
+$----------------------------------------------------------------------------
+   PARAMETER G(LIQUID,NI,Y,ZR;0)    298.15   80000;                  6000 N !
+   
+                                   
+$---------------------------------------------------
+$-------------NI7ZR2--------------------------------
+$---------------------------------------------------
+ PHASE NI7ZR2 % 2 7 2 !
+ CONSTITUENT NI7ZR2 :NI :Y,ZR : !
+ PARAMETER G(NI7ZR2,NI:ZR;0)     298.15  -361122.87+32.8988*T
+                                            +7*GHSERNI#+2*GHSERZR#;  6000 N !
+$----------------------------------------------------------------------------                                           
+ PARAMETER G(NI7ZR2,NI:Y;0)      298.15   -220826
+                                             +7*GHSERNI#+2*GHSERYY#; 6000 N !
+ PARAMETER G(NI7ZR2,NI:Y,ZR;0)   298.15  11757-27.5*T;               6000 N ! 
+
+
+$---------------------------------------------------
+$-------------NI3ZR---------------------------------
+$---------------------------------------------------
+ PHASE NI3ZR % 2 3 1 !
+ CONSTITUENT NI3ZR :NI : Y,ZR : !
+ PARAMETER G(NI3ZR,NI:ZR;0)    298.15  -165138.45+14.02705*T 
+                                          +3*GHSERNI#+GHSERZR#;     6000 N !
+$----------------------------------------------------------------------------
+ PARAMETER G(NI3ZR,NI:Y;0)     298.15  -103875-1.52*T
+                                          +3*GHSERNI#+GHSERYY#;     6000 N !
+ PARAMETER G(NI3ZR,NI:Y,ZR;0)  298.15  -4653;                       6000 N !
+
+
+$---------------------------------------------------
+$-------------NI21ZR8-------------------------------
+$---------------------------------------------------
+ PHASE NI21ZR8  %  2 21 8 !
+ CONSTITUENT NI21ZR8  :NI : Y,ZR :  !
+ PARAMETER G(NI21ZR8,NI:ZR;0)   298.15 -1224732.98+94.4664*T
+                                           +21*GHSERNI# +8*GHSERZR;  6000 N !
+$----------------------------------------------------------------------------                                           
+ PARAMETER G(NI21ZR8,NI:Y;0)    298.15 -708560-3.52*T
+                                           +21*GHSERNI#+8*GHSERYY#; 6000 N !                        
+ PARAMETER G(NI21ZR8,NI:Y,ZR;0) 298.15 18557;                       6000 N !
+ 
+ 
+$---------------------------------------------------
+$-------------NI10ZR7-------------------------------
+$---------------------------------------------------
+ PHASE NI10ZR7 % 2 10 7 !
+ CONSTITUENT NI10ZR7 :NI : Y,ZR : !
+ PARAMETER G(NI10ZR7,NI:ZR;0)   298.15 -769211+28.2834*T
+                                          +10*GHSERNI#+7*GHSERZR#;  6000 N !
+$----------------------------------------------------------------------------                                           
+ PARAMETER G(NI10ZR7,NI:Y;0)    298.15 -417850+7.56*T
+                                          +10*GHSERNI#+7*GHSERYY#;  6000 N !                             
+ PARAMETER G(NI10ZR7,NI:Y,ZR;0) 298.15 35785;                       6000 N !
+ 
+                                  
+$---------------------------------------------------
+$-------------NI11ZR9-------------------------------
+$---------------------------------------------------
+ PHASE NI11ZR9 % 2 11 9 !
+ CONSTITUENT NI11ZR9 :NI : ZR : !
+ PARAMETER G(NI11ZR9,NI:ZR;0)   298.15  -889727.62+16.6*T
+                                          +11*GHSERNI#+9*GHSERZR#;  6000 N ! 
+                                   
+$---------------------------------------------------
+$--------------NIZR---------------------------------
+$---------------------------------------------------
+ PHASE NIZR  %  2 1   1 !
+ CONSTITUENT NIZR  :NI : Y,ZR :  !
+ PARAMETER G(NIZR,NI:ZR;0)     298.15 -90057.5+1.9442*T
+                                              +GHSERNI#+GHSERZR#;   6000 N !
+$----------------------------------------------------------------------------                                           
+PARAMETER G(NIZR,NI:Y;0)      298.15  -27520+5.25*T
+                                              +GHSERNI#+GHSERYY#;   6000 N !
+PARAMETER G(NIZR,NI:Y,ZR;0)   298.15  -5906;                        6000 N !
+
+
+$---------------------------------------------------
+$--------------NIZR2--------------------------------
+$---------------------------------------------------
+PHASE ZR2NI  %  2 2   1 !
+CONSTITUENT ZR2NI  :ZR,Y : NI :  !
+PARAMETER G(ZR2NI,ZR:NI;0)   298.15   -95236.51-6.9605*T
+                                          +GHSERNI#+2*GHSERZR#;     6000 N !
+$----------------------------------------------------------------------------
+PARAMETER G(ZR2NI,Y:NI;0)    298.15   -5535+52.16*T
+                                          +GHSERNI#+2*GHSERYY#;     6000 N !
+PARAMETER G(ZR2NI,Y,ZR:NI;0) 298.15   -89855;                       6000 N !
+
+
+
+$---------------------------------------------------
+$--------------NI17Y2-------------------------------
+$---------------------------------------------------
+PHASE NI17Y2 % 2 17 2 !
+CONSTITUENT NI17Y2 :NI:Y,ZR:!
+PARAMETER G(NI17Y2,NI:Y;0)    298.15  -386087+61.742*T
+                                         +17*GHSERNI#+2*GHSERYY#;   6000 N !
+$----------------------------------------------------------------------------                             
+PARAMETER G(NI17Y2,NI:ZR;0)   298.15 -331325+2.15*T
+                                         +17*GHSERNI#+2*GHSERZR#;   6000 N !
+$PARAMETER G(NI17Y2,NI:Y,ZR;0) 298.15 3000;                         6000 N !
+ 
+ 
+$---------------------------------------------------
+$--------------NI5Y---------------------------------
+$---------------------------------------------------
+PHASE NI5Y % 2 5 1 !
+CONSTITUENT NI5Y :NI:Y,ZR:!
+PARAMETER G(NI5Y,NI:Y;0)    298.15   5*GHSERNI#+1*GHSERYY#-186706
+                                          +31.187*T;                6000 N !
+$---------------------------------------------------------------------------- 
+PARAMETER G(NI5Y,NI:ZR;0)   298.15   -150132+6.63*T
+                                          +5*GHSERNI#+GHSERZR#;     6000 N !
+PARAMETER G(NI5Y,NI:Y,ZR;0) 298.15   -29883;                        6000 N !
+ 
+     
+$---------------------------------------------------
+$--------------NI4Y---------------------------------
+$---------------------------------------------------
+PHASE NI4Y % 2 4 1 !
+CONSTITUENT NI4Y :NI:Y,ZR:!
+PARAMETER G(NI4Y,NI:Y;0)    298.15 4*GHSERNI#+1*GHSERYY#-160555
+                                   +22.979*T;                       6000 N !
+$---------------------------------------------------------------------------- 
+PARAMETER G(NI4Y,NI:ZR;0)   298.15 -82930+4*GHSERNI#+GHSERZR#;    6000 N !                                   
+PARAMETER G(NI4Y,NI:Y,ZR;0) 298.15 -69753-35.25*T;                  6000 N !
+ 
+ 
+$---------------------------------------------------
+$--------------NI7Y2--------------------------------
+$---------------------------------------------------
+PHASE NI7Y2 % 2 7 2 !
+CONSTITUENT NI7Y2 :NI:Y,ZR:!
+PARAMETER G(NI7Y2,NI:Y;0)    298.15 7*GHSERNI#+2*GHSERYY#-294966
+                                       +38.77*T;                     6000 N !
+$----------------------------------------------------------------------------
+PARAMETER G(NI7Y2,NI:ZR;0)   298.15 -249603+7*GHSERNI#+2*GHSERZR#;   6000 N !
+PARAMETER G(NI7Y2,NI:Y,ZR;0) 298.15 -94829-8.36*T;                   6000 N !
+
+
+$---------------------------------------------------
+$--------------NI3Y---------------------------------
+$---------------------------------------------------
+PHASE NI3Y % 2 3 1 !
+CONSTITUENT NI3Y :NI:Y,ZR:!
+PARAMETER G(NI3Y,NI:Y;0)    298.15 3*GHSERNI#+1*GHSERYY#-134358
+                                      +16.477*T;                    6000 N !
+$----------------------------------------------------------------------------                                  
+PARAMETER G(NI3Y,NI:ZR;0)   298.15 -130529+3*GHSERNI#+GHSERZR#;     6000 N !
+PARAMETER G(NI3Y,NI:Y,ZR;0) 298.15 -19976;                          6000 N !    
+ 
+ 
+$---------------------------------------------------
+$--------------NI2Y---------------------------------
+$---------------------------------------------------
+PHASE NI2Y % 2 2 1 !
+CONSTITUENT NI2Y :NI:Y,ZR:!
+PARAMETER G(NI2Y,NI:Y;0)    298.15 2*GHSERNI#+1*GHSERYY#-101736
+                                  +8.988*T;                         6000 N ! 
+PARAMETER G(NI2Y,NI:ZR;0)   298.15 -117685+2*GHSERNI#+GHSERZR#;     6000 N !    
+PARAMETER G(NI2Y,NI:Y,ZR;0) 298.15 8950;                            6000 N !
+ 
+     
+$---------------------------------------------------
+$--------------NIY----------------------------------
+$---------------------------------------------------
+PHASE NIY % 2 1 1 !
+CONSTITUENT NIY :NI:Y,ZR:!
+PaRameteR G(NIY,NI:Y;0) 298.15 1*GHSERNI#+1*GHSERYY#-67908
+                               +6.11*T;                            6000 N !
+$----------------------------------------------------------------------------
+PARAMETER G(NIY,NI:ZR;0)   298.15 -73869+GHSERNI#+GHSERZR#;        6000 N !
+PARAMETER G(NIY,NI:Y,ZR;0) 298.15 5108;                            6000 N !
+
+
+$---------------------------------------------------
+$--------------NI2Y3--------------------------------
+$---------------------------------------------------
+PHASE NI2Y3 % 2 2 3 !
+CONSTITUENT NI2Y3 :NI:Y,ZR:!
+PARAMETER G(NI2Y3,NI:Y;0)  298.15 2*GHSERNI#+3*GHSERYY#
+                                         -168600+37.482*T;         6000 N !
+$----------------------------------------------------------------------------
+PARAMETER G(NI2Y3,NI:ZR;0)    298.15 -148658+4.53*T
+                                           +2*GHSERNI#+3*GHSERZR#; 6000 N !
+ 
+    
+$---------------------------------------------------
+$--------------NIY3---------------------------------
+$---------------------------------------------------
+PHASE Y3NI % 2 1 3 !
+CONSTITUENT Y3NI :NI:Y,ZR:!
+PARAMETER G(Y3NI,NI:Y;0)    298.15 GHSERNI#+3*GHSERYY#
+                                          -84446+14.05*T;           6000 N !
+$----------------------------------------------------------------------------
+PARAMETER G(Y3NI,NI:ZR;0)   298.15 23500+27.22*T
+                                          +1*GHSERNI#+3*GHSERZR#;   6000 N !
+PARAMETER G(Y3NI,NI:Y,ZR;0) 298.15 -118998;                         6000 N !
+
+
+$---------------------------------------------------
+$-----------------NI5ZR-----------------------------
+$---------------------------------------------------
+ PHASE NI5ZR  %  2 5   1 !
+ CONSTITUENT NI5ZR  :NI,ZR :Y,ZR,VA :  !
+ PARAMETER G(NI5ZR,NI:ZR;0)      298.15 -199290.31+24.6751*T
+                                     +5*GHSERNI#+GHSERZR#;         6000 N !
+ PARAMETER G(NI5ZR,NI:VA;0)      298.15 +40000+5*GHSERNI#;         6000 N !                                     
+ PARAMETER G(NI5ZR,ZR:ZR;0)      298.15 +290000+12*T+6*GHSERZR#;   6000 N !
+ PARAMETER G(NI5ZR,ZR:VA;0)      298.15 +81271.35+5*GHSERZR#;      6000 N !
+ PARAMETER G(NI5ZR,NI,ZR:VA;0)   298.15 -926293.25+43.1979*T;      6000 N !
+ PARAMETER G(NI5ZR,NI,ZR:ZR;0)   298.15 -926293.25+43.1979*T;      6000 N !
+ PARAMETER G(NI5ZR,NI:ZR,VA;0)   298.15 -36024.72+10.1822*T;       6000 N !
+ PARAMETER G(NI5ZR,ZR:ZR,VA;0)   298.15 -36024.72+10.1822*T;       6000 N ! 
+$---------------------------------------------------------------------------
+ PARAMETER G(NI5ZR,NI:Y;0)  298.15 -119689+18*T+5*GHSERNI#+GHSERYY#;  6000 N !
+ PARAMETER G(NI5ZR,ZR:Y;0)  298.15 4982+5*GHSERZR#+GHSERYY#;          6000 N !
+ PARAMETER G(NI5ZR,NI:Y,ZR;0)         298.15 -136650+60*T;            6000 N !
+ PARAMETER G(NI5ZR,NI:Y,ZR;1)         298.15 50127;                   6000 N !  
+ PARAMETER G(NI5ZR,NI,ZR:Y;0)         298.15 -109943;                 6000 N ! 
+
+
+$---------------------------------------------------
+$-----------------TAO-------------------------------
+$---------------------------------------------------
+
+PHASE TAO % 2 2 1 !
+CONSTITUENT TAO :NI:Y,ZR:!
+PARAMETER G(TAO,NI:Y;0) 298.15    -55027+2.53*T
+                                      +2*GHSERNI#+GHSERYY#;        6000 N !
+PARAMETER G(TAO,NI:ZR;0) 298.15   -120097
+                                      +2*GHSERNI#+GHSERZR#;        6000 N !
+PARAMETER G(TAO,NI:Y,ZR;0) 298.15 -54258;                          6000 N !
+
+
+
+
+
+
+ LIST_OF_REFERENCES
+ NUMBER  SOURCE
+   REF4     'PURE5 - SGTE PuRe Elements (UnaRy) Database (VeRsIon 5.1),
+           developed by SGTE (ScIentIfIc GRoup TheRmodata EuRope), 1991-2010,
+            and pRovIded by TCSAB (Jun. 2010). '
+   REF2     'PURE3 - SGTE PuRe Elements (UnaRy) Database (VeRsIon 3.0),
+           developed by SGTE (ScIentIfIc GRoup TheRmodata EuRope), 1991-1996,
+            and pRovIded by TCSAB (Aug. 1996). '
+   REF3     'PURE4 - SGTE PuRe Elements (UnaRy) Database (VeRsIon 4.6),
+           developed by SGTE (ScIentIfIc GRoup TheRmodata EuRope), 1991-2008,
+            and pRovIded by TCSAB (Jan. 2008). '
+   REF55    'N.DupIn, Calphad, 25(2)(2001)279-298;Al-CR-NI'
+   REF132   'A.DuRga, Calphad, 34(2010)200-205; Co-ZR'
+   REF1     'PURE1 - SGTE PuRe Elements (UnaRy) Database (VeRsIon 1.0),
+           developed by SGTE (ScIentIfIc GRoup TheRmodata EuRope), 1991-1992,
+            and pRovIded by TCSAB (Jan. 1991). Also In: DInsdale A. (1991):
+           SGTE data foR puRe elements, Calphad, 15, 317-425.'
+   REF6     'SGTE substance database, TheRmo-Calc Company, Sweden, (2008)'
+   REF5     'I. AnsaRa (EdItoR), COST 507, (1998)'
+   REF91    'S.H.LIu, Calphad, 30(2006)334¨C340; Al-Y'
+   REF47    'N.DupIn, August 1999, unpublIshed RevIsIon; Al-NI-TI'
+   REF131   'S.H.LIu, unpublIshed woRk, 2010; Mn-NI,Al-Mn-NI,Mn-NI-Zn'
+   REF84    'S.Matsumoto, MateR.TRans., 46(12)(2005)2920-2930; Nb-NI'
+   REF76    'H.S.LIu, Calphad, 28(2004)363-370; NI-Sn'
+   REF122   'J.De KeyzeR, Calphad, 33(2009)109-123; Fe-NI-TI'
+   REF7     'TC17:NI-ZR'
+   REF106   'R.J.PeRez, Calphad, 32(2008)593¨C601; Sn-ZR'
+  ! 
+ 
